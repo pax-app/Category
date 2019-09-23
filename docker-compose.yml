@@ -1,10 +1,10 @@
 version: "3.6"
 
 services:
-  users:
+  category-service:
     build:
-    context: ./services/users
-    dockerfile: Dockerfile-dev
+    context: ./services/category
+    dockerfile: Dockerfile
     volumes:
       - "./services/category:/usr/src/app"
     ports:
