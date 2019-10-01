@@ -7,7 +7,7 @@ from flask import current_app
 app = create_app()
 cli = FlaskGroup(app)
 
-app.config['SQLALCHEMY_DATABASE_URL'] = 'mysql://f15jto2ojbvbb18m:ojjbjm6lswedzs91@bqmayq5x95g1sgr9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/j3uyakutbdjh3tdy'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://f15jto2ojbvbb18m:ojjbjm6lswedzs91@bqmayq5x95g1sgr9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/j3uyakutbdjh3tdy'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 
