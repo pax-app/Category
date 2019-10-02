@@ -1,6 +1,5 @@
 from database import db
-from Flask import current_app
-from project import create_app
+from flask import current_app
 
 
 class GeneralCategory(db.Model):
