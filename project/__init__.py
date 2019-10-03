@@ -1,7 +1,6 @@
 import os
 from flask import Flask
 from project.api.views import category_blueprint
-# from project.api.views import general_category_blueprint
 from database import db, migrate
 
 
