@@ -1,7 +1,7 @@
 import os
 from flask import Flask
-from project.api.views import provider_category_blueprint
-from project.api.views import general_category_blueprint
+from project.api.views import category_blueprint
+# from project.api.views import general_category_blueprint
 from database import db, migrate
 
 
@@ -18,7 +18,6 @@ def create_app(script_info=None):
     migrate.init_app(app, db)
 
     # register blueprints
-    app.register_blueprint(general_category_blueprint),
-    app.register_blueprint(provider_category_blueprint),
+    app.register_blueprint(category_blueprint, url_prefix='/api/category'),
 
     return app

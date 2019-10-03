@@ -2,11 +2,10 @@ from project.api.models import GeneralCategory
 from project.api.models import ProviderCategory
 from flask import request, jsonify, Blueprint
 
-general_category_blueprint = Blueprint('general', __name__)
-provider_category_blueprint = Blueprint('provider', __name__)
+category_blueprint = Blueprint('category', __name__)
 
 
-@general_category_blueprint.route('/general/category', methods=['GET'])
+@category_blueprint.route('/general', methods=['GET'])
 def get_general_categories():
     return jsonify({
         'status': 'success',
@@ -16,7 +15,7 @@ def get_general_categories():
     })
 
 
-@provider_category_blueprint.route('/provider/category', methods=['GET'])
+@category_blueprint.route('/provider', methods=['GET'])
 def get_provider_categories():
     return jsonify({
         'status': 'success',
