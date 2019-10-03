@@ -17,6 +17,7 @@ def create_app(script_info=None):
     migrate.init_app(app, db)
 
     # register blueprints
-    app.register_blueprint(category_blueprint)
+    app.register_blueprint(general_category_blueprint),
+    app.register_blueprint(provider_category_blueprint),
 
     return app
