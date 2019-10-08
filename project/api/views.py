@@ -25,6 +25,17 @@ def get_provider_categories():
     })
 
 
+@category_blueprint.route('/<general_category_id>/provider', methods=['GET'])
+def get_specific_provider_categories(general_category_id):
+    response = {
+        'status': 'success',
+        'data': {
+            'categories': [PROVIDER_CATEGORY.to_json() for PROVIDER_CATEGORY in ProviderCategory.query.filter_by(general_category_id=(general_category_id))]
+        }
+    }
+    return jsonify(response), 200
+
+
 @category_blueprint.route('/<provider_id>/category_provider/<provider_category_id>', methods=['DELETE'])
 def remove_category_provider_relationship(provider_id, provider_category_id):
     error_response = {
