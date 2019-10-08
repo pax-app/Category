@@ -17,6 +17,6 @@ def create_app(script_info=None):
     migrate.init_app(app, db)
 
     # register blueprints
-    app.register_blueprint(category_blueprint, url_prefix='/api/category'),
+    app.register_blueprint(category_blueprint, url_prefix='/category'),
 
     return app
