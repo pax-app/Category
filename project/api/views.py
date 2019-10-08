@@ -1,6 +1,6 @@
-from project.api.models import GeneralCategory
-from project.api.models import ProviderCategory
+from project.api.models import GeneralCategory, ProviderCategory, Works
 from flask import request, jsonify, Blueprint
+from database import db
 
 category_blueprint = Blueprint('category', __name__)
 
@@ -23,3 +23,29 @@ def get_provider_categories():
             'category': [PROVIDER_CATEGORY.to_json() for PROVIDER_CATEGORY in ProviderCategory.query.all()]
         }
     })
+
+
+@category_blueprint.route('/<provider_id>/category_provider/<provider_category_id>', methods=['DELETE'])
+def remove_category_provider_relationship(provider_id, provider_category_id):
+    error_response = {
+        'status': 'fail',
+        'message': 'Relationship Not Found'
+    }
+
+    works = Works.query.filter_by(
+        provider_category_id=int(provider_category_id), provider_id=int(provider_id)).first()
+
+    if not works:
+        return jsonify(error_response), 404
+
+    db.session.delete(works)
+    db.session.commit()
+
+    response = {
+        'status': 'success',
+        'data': {
+            'message': 'Relationship deleted!'
+        }
+    }
+
+    return jsonify(response), 200
