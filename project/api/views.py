@@ -28,10 +28,19 @@ def get_provider_categories():
 
 @category_blueprint.route('/<general_category_id>/provider', methods=['GET'])
 def get_specific_provider_categories(general_category_id):
+    provider_categories = [PROVIDER_CATEGORY.to_json() for PROVIDER_CATEGORY in ProviderCategory.query.filter_by(general_category_id=(general_category_id))]
+
+    if not provider_categories:
+        response = {
+            'status': 'failed',
+            'error': "ID Not Found"
+        }
+        return jsonify(response), 404
+
     response = {
         'status': 'success',
         'data': {
-            'categories': [PROVIDER_CATEGORY.to_json() for PROVIDER_CATEGORY in ProviderCategory.query.filter_by(general_category_id=(general_category_id))]
+            'categories': provider_categories
         }
     }
     return jsonify(response), 200
