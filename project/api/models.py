@@ -42,5 +42,5 @@ class Works(db.Model):
     __tablename__ = 'works'
 
     provider_category_id = db.Column(
-        db.Integer, db.ForeignKey('PROVIDER_CATEGORY.id'), primary_key=True)
+        db.Integer, db.ForeignKey('PROVIDER_CATEGORY.provider_category_id'), primary_key=True)
     provider_id = db.Column(db.Integer, primary_key=True, nullable=False)

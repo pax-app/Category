@@ -37,7 +37,7 @@ def get_specific_provider_categories(general_category_id):
     return jsonify(response), 200
 
 
-@category_blueprint.route('/category_provider', methods=['POST'])
+@category_blueprint.route('/categoryprovider', methods=['POST'])
 def set_category_provider_relationship():
     request_data = request.get_json()
 
@@ -55,7 +55,7 @@ def set_category_provider_relationship():
     provider_category_id = works.get('provider_category_id')
 
     try:
-        works = Works(provider_id, provider_category_id)
+        works = Works(provider_id=provider_id, provider_category_id=provider_category_id)
 
         db.session.add(works)
         db.session.flush()
