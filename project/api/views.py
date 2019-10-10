@@ -1,4 +1,4 @@
-from project.api.models import GeneralCategory, ProviderCategory, Works
+from project.api.models import GeneralCategory, ProviderCategory
 from flask import request, jsonify, Blueprint
 from database import db
 from sqlalchemy import exc
