@@ -14,8 +14,8 @@ class GeneralCategory(db.Model):
 
     def to_json(self):
         return {
-            'general_category.id': self.general_category_id,
-            'general_category.name': self.name,
+            'id': self.general_category_id,
+            'name': self.name,
         }
 
 
@@ -33,6 +33,7 @@ class ProviderCategory(db.Model):
 
     def to_json(self):
         return {
-            'provider_category.id': self.provider_category_id,
-            'provider_category.name': self.name,
+            'generalId': self.general_category_id,
+            'id': self.provider_category_id,
+            'name': self.name,
         }
