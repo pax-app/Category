@@ -1,4 +1,4 @@
-from project.api.models import GeneralCategory, ProviderCategory
+from project.api.models import GeneralCategory, ProviderCategory, Context
 from flask import request, jsonify, Blueprint
 from database import db
 from sqlalchemy import exc
@@ -8,29 +8,48 @@ category_blueprint = Blueprint('category', __name__)
 
 @category_blueprint.route('/general', methods=['GET'])
 def get_general_categories():
+    context = Context(GeneralCategory())
+
+    categories = []
+    for GENERAL_CATEGORY in GeneralCategory.query.all():
+        category = context.return_json(category=GENERAL_CATEGORY)
+        categories.append(category)
+
     return jsonify({
         'status': 'success',
         'data': {
-            'categories': [GENERAL_CATEGORY.to_json() for GENERAL_CATEGORY in GeneralCategory.query.all()]
+            'categories': categories
         }
     })
 
 
 @category_blueprint.route('/provider', methods=['GET'])
 def get_provider_categories():
+    context = Context(ProviderCategory())
+
+    categories = []
+    for PROVIDER_CATEGORY in ProviderCategory.query.all():
+        category = context.return_json(category=PROVIDER_CATEGORY)
+        categories.append(category)
+
     return jsonify({
         'status': 'success',
         'data': {
-            'categories': [PROVIDER_CATEGORY.to_json() for PROVIDER_CATEGORY in ProviderCategory.query.all()]
+            'categories': categories
         }
     })
 
 
 @category_blueprint.route('/<general_category_id>/provider', methods=['GET'])
 def get_specific_provider_categories(general_category_id):
-    provider_categories = [PROVIDER_CATEGORY.to_json() for PROVIDER_CATEGORY in ProviderCategory.query.filter_by(general_category_id=(general_category_id))]
+    context = Context(ProviderCategory())
 
-    if not provider_categories:
+    categories = []
+    for PROVIDER_CATEGORY in ProviderCategory.query.filter_by(general_category_id=(general_category_id)):
+        category = context.return_json(category=PROVIDER_CATEGORY)
+        categories.append(category)
+
+    if not categories:
         response = {
             'status': 'failed',
             'error': "ID Not Found"
@@ -40,7 +59,7 @@ def get_specific_provider_categories(general_category_id):
     response = {
         'status': 'success',
         'data': {
-            'categories': provider_categories
+            'categories': categories
         }
     }
     return jsonify(response), 200
