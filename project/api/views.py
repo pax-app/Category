@@ -40,7 +40,7 @@ def get_provider_categories():
     })
 
 
-@category_blueprint.route('/<general_category_id>/provider', methods=['GET'])
+@category_blueprint.route('/provider/<general_category_id>', methods=['GET'])
 def get_specific_provider_categories(general_category_id):
     context = Context(ProviderCategory())
 
