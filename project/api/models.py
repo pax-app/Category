@@ -1,7 +1,8 @@
-from database import db
+from database_singleton import Singleton
 from flask import current_app
-
 from flask_sqlalchemy import SQLAlchemy
+
+db = Singleton().database_connection()
 
 
 class Category():

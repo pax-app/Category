@@ -1,6 +1,5 @@
 from project.api.models import GeneralCategory, ProviderCategory, Context
 from flask import request, jsonify, Blueprint
-from database import db
 from sqlalchemy import exc
 
 category_blueprint = Blueprint('category', __name__)
