@@ -11,34 +11,15 @@ class Category():
 
 
 class Context():
-    """
-    The Context defines the interface of interest to clients.
-    """
-
     def __init__(self, category: Category):
-        """
-        Usually, the Context accepts a category through the constructor, but
-        also provides a setter to change it at runtime.
-        """
-
         self._category = category
 
     @property
     def category(self):
-        """
-        The Context maintains a reference to one of the Category objects. The
-        Context does not know the concrete class of a category. It should work
-        with all strategies via the Category interface.
-        """
-
         return self._category
 
     @category.setter
     def category(self, category: Category):
-        """
-        Usually, the Context allows replacing a Category object at runtime.
-        """
-
         self._category = category
 
     def return_json(self, category):
