@@ -1,8 +1,4 @@
 import coverage
-import unittest
-from project import create_app
-from flask.cli import FlaskGroup
-from flask import current_app
 
 COV = coverage.coverage(
     branch=True,
@@ -13,6 +9,12 @@ COV = coverage.coverage(
     ]
 )
 COV.start()
+
+from flask import current_app
+from flask.cli import FlaskGroup
+from project import create_app
+import unittest
+from project.api.models import GeneralCategory, ProviderCategory
 
 
 # Config coverage report
