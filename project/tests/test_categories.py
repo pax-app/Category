@@ -26,6 +26,38 @@ class TestCategoryService(BaseTestCase):
             self.assertIn('Serviços Domésticos', data['data']['categories'][2]['name'])
             self.assertEqual(4, data['data']['categories'][3]['id'])
             self.assertIn('Design e Tecnologia', data['data']['categories'][3]['name'])
+    def test_get_all_provider_categories(self):
+        with self.client:
+            response = self.client.get('/category/provider')
+            data = json.loads(response.data.decode())
+
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('success', data['status'])
+
+            self.assertEqual(1, data['data']['categories'][0]['id'])
+            self.assertEqual(1, data['data']['categories'][0]['generalId'])
+            self.assertIn('Aparelho de Som', data['data']['categories'][0]['name'])
+
+    def test_get_all_provider_categories_per_general(self):
+        with self.client:
+            response = self.client.get('/category/provider/1')
+            data = json.loads(response.data.decode())
+
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('success', data['status'])
+
+            self.assertEqual(1, data['data']['categories'][0]['id'])
+            self.assertEqual(1, data['data']['categories'][0]['generalId'])
+            self.assertIn('Aparelho de Som', data['data']['categories'][0]['name'])
+
+    def test_get_all_provider_categories_per_general_fail(self):
+        with self.client:
+            response = self.client.get('/category/provider/7')
+            data = json.loads(response.data.decode())
+
+            self.assertEqual(response.status_code, 404)
+            self.assertIn('failed', data['status'])
+            self.assertIn('ID Not Found', data['error'])
 
 if __name__ == '__main__':
     unittest.main()
