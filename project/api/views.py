@@ -48,7 +48,7 @@ def get_specific_provider_categories(general_category_id):
         category = context.return_json(category=PROVIDER_CATEGORY)
         categories.append(category)
 
-    if not categories:
+    if len(categories) == 0:
         response = {
             'status': 'failed',
             'error': "ID Not Found"
